@@ -1,0 +1,10 @@
+# Ignore virtual environments
+.venv/
+env/
+env-dev/
+env-test/
+
+# Ignore environment variable files
+.env
+.env.local
+.env.*.local
