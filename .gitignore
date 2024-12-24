@@ -8,3 +8,22 @@ env-test/
 .env
 .env.local
 .env.*.local
+
+# Ignorar archivos compilados de Python
+*.pyc
+
+# Ignorar carpetas de caché de Python
+__pycache__/
+
+# Ignorar reportes de pruebas o coverage
+*.xml
+*.json
+*.html
+.coverage
+
+# Ignorar archivos CSS o JS generados automáticamente (si corresponde)
+*.css
+*.js
+
+# Ignorar imágenes y otros archivos no esenciales (opcional)
+*.png
