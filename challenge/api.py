@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import List
 import pandas as pd
 from challenge.model import DelayModel
@@ -17,6 +17,18 @@ class PredictionInput(BaseModel):
     TIPOVUELO: str
     MES: int
 
+    @field_validator('TIPOVUELO')
+    def validate_tipovuelo(cls, v):
+        if v not in ['I', 'N']:
+            raise ValueError('TIPOVUELO must be either "I" or "N"')
+        return v
+
+    @field_validator('MES')
+    def validate_mes(cls, v):
+        if not 1 <= v <= 12:
+            raise ValueError('MES must be between 1 and 12')
+        return v
+
 # Health endpoint
 @app.get("/health", status_code=200)
 async def get_health() -> dict:
@@ -27,7 +39,7 @@ async def get_health() -> dict:
 async def post_predict(inputs: List[PredictionInput]) -> dict:
     try:
         # Convert input data to a DataFrame
-        input_data = pd.DataFrame([input.dict() for input in inputs])
+        input_data = pd.DataFrame([input.model_dump() for input in inputs])
 
         # Preprocess the data
         features = delay_model.preprocess(input_data)
