@@ -28,6 +28,7 @@ class TestModel(unittest.TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.model = DelayModel()
+        self.model.load("challenge/reg_model_2.pkl") 
         self.data = pd.read_csv(filepath_or_buffer=r"data\data.csv")
         
 
