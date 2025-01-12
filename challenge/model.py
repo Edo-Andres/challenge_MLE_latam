@@ -4,6 +4,8 @@ from typing import Tuple, Union, List
 import joblib
 import numpy as np
 from datetime import datetime
+import os
+import joblib
 
 class DelayModel:
 
@@ -67,7 +69,15 @@ class DelayModel:
         Args:
             file_path (str): Ruta al archivo desde donde se cargará el modelo.
         """
-        file_path =  r'challenge\reg_model_2.pkl'
+        # Si la ruta es relativa, conviértela a absoluta
+        if not os.path.isabs(file_path):
+            # Si el argumento ya incluye 'challenge/', evita duplicarlo
+            if file_path.startswith("challenge/") or file_path.startswith("challenge\\"):
+                file_path = os.path.join(os.path.dirname(__file__), file_path.split("/", 1)[1])
+            else:
+                file_path = os.path.join(os.path.dirname(__file__), file_path)
+
+        # Cargar el modelo
         self._model = joblib.load(file_path)
         print(f"Model loaded from {file_path}")
 

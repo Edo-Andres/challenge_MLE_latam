@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Exponer el puerto en el que la aplicación correrá
-EXPOSE 8000
+EXPOSE 8080
 
 # Comando para iniciar la aplicación
 CMD ["uvicorn", "challenge.api:app", "--host", "0.0.0.0", "--port", "8080"]
