@@ -26,7 +26,7 @@ jobs:
           # Se han eliminado los inputs no válidos: service_account_key y export_default_credentials
 
       - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker --quiet
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
 
       - name: Build and Push Docker Image
         run: |
